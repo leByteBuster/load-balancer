@@ -14,7 +14,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     // Read in env vars
     let host = env::var("HOST").unwrap_or_else(|_| "127.0.0.1".to_string());
     let port: u16 = env::var("PORT")
-        .unwrap_or_else(|_| "8080".to_string())
+        .unwrap_or_else(|_| "5000".to_string())
         .parse()?;
 
     let addr: SocketAddr = format!("{}:{}", host, port).parse()?;
@@ -25,7 +25,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         .route("/", get(handle_request))
         .route("/help", get(handle_help));
 
-    println!("Server is running on {}:{}", host, port);
+    println!("Mock server is running on {}:{}", host, port);
 
     let server_handle = axum::serve(tcp, router).await;
 
@@ -57,7 +57,7 @@ async fn handle_request(host: Host, method: Method, headers: HeaderMap) -> &'sta
     //println!("Headers: {:?}", headers);
 
     // answer for client
-    "Connection was successful"
+    "Hello from backend server"
 }
 
 async fn handle_help() -> &'static str {

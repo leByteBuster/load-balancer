@@ -1,1 +1,4 @@
+# Generated files
 /target
+/load-balancer/target
+/mock-backend/target
